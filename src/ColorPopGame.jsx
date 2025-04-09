@@ -72,7 +72,7 @@ const ColorPopGame = () => {
       // const timer = setTimeout(() => {
       //   setShowMessage(false); // Hide message after 1 second
       // }, 1000);
-      return () => clearTimeout(timer); // Cleanup timer on unmount
+      // return () => clearTimeout(timer); // Cleanup timer on unmount
     }
   }, [gameStarted]);
 
@@ -167,15 +167,15 @@ const ColorPopGame = () => {
   return (
     <div className="game-container">
       <audio ref={audioRef} loop>
-        <source src="/public/game-music.mp3" type="audio/mpeg" />
+        <source src="/game-music.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <audio ref={popSoundRef}>
-        <source src="/public/bubble-pop.mp3" type="audio/mpeg" />
+        <source src="/bubble-pop.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <audio ref={clapSoundRef}>
-        <source src="/public/cheer.mp3" type="audio/mpeg" />
+        <source src="/cheer.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       {!gameStarted ? (
