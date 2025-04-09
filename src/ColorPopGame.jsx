@@ -69,9 +69,9 @@ const ColorPopGame = () => {
   useEffect(() => {
     if (gameStarted) {
       setShowMessage(true); // Show message when the game starts
-      const timer = setTimeout(() => {
-        setShowMessage(false); // Hide message after 1 second
-      }, 1000);
+      // const timer = setTimeout(() => {
+      //   setShowMessage(false); // Hide message after 1 second
+      // }, 1000);
       return () => clearTimeout(timer); // Cleanup timer on unmount
     }
   }, [gameStarted]);
@@ -148,7 +148,7 @@ const ColorPopGame = () => {
   const handleRestart = () => {
     setScore(0);
     setLevel(0); // Reset level
-    setMessage("Click the bubble to start!");
+    setMessage("Click the bubble to pop!");
     setBubble(null);
     setGameStarted(false); // Reset to game start screen
     setGameOver(false); // Reset game over state
