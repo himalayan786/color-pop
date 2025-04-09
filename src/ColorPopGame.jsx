@@ -129,7 +129,7 @@ const ColorPopGame = () => {
       "#ff4d4d": "red",
       "#4dd2ff": "blue",
       "#ffff66": "yellow",
-      "#99ff99": "green",
+      "#99ff99": "light green",
       "#ff99cc": "pink",
       "#ff6600": "orange",
       "#6600ff": "purple",
@@ -139,7 +139,7 @@ const ColorPopGame = () => {
       "#00ccff": "cyan",
       "#cc33ff": "violet",
       "#ff9999": "light red",
-      "#66ff66": "light green",
+      "#66ff66": "green",
       "#ffcc99": "peach",
     };
     return colorMap[color] || "unknown color";
