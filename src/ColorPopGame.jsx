@@ -167,15 +167,15 @@ const ColorPopGame = () => {
   return (
     <div className="game-container">
       <audio ref={audioRef} loop>
-        <source src="/game-music.mp3" type="audio/mpeg" />
+        <source src="./gamemusic.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <audio ref={popSoundRef}>
-        <source src="/bubble-pop.mp3" type="audio/mpeg" />
+        <source src="./bubblepop.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <audio ref={clapSoundRef}>
-        <source src="/cheer.mp3" type="audio/mpeg" />
+        <source src="./cheer.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       {!gameStarted ? (
