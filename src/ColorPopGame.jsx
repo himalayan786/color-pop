@@ -3,7 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 const COLORS = [
   "#ff4d4d", "#4dd2ff", "#ffff66", "#99ff99", "#ff99cc", 
   "#ff6600", "#6600ff", "#33cc33", "#ffcc00", "#ff0066",
-  "#00ccff", "#cc33ff", "#ff9999", "#66ff66", "#ffcc99"
+  "#00ccff", "#cc33ff", "#ff9999", "#66ff66", "#ffcc99",
+  "#000000", "#8b4513", "#808080" // Added black, brown, grey
 ];
 
 const Bubble = ({ id, color, onPop }) => {
@@ -141,6 +142,9 @@ const ColorPopGame = () => {
       "#ff9999": "light red",
       "#66ff66": "green",
       "#ffcc99": "peach",
+      "#000000": "black", // Added black
+      "#8b4513": "brown", // Added brown
+      "#808080": "grey",  // Added grey
     };
     return colorMap[color] || "unknown color";
   };

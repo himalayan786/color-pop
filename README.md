@@ -1,23 +1,60 @@
-# React + Vite
+# Color Pop Game 🎈
 
-npm create vite@latest color-pop -- --template react
+Color Pop is a fun and interactive game where players pop colorful bubbles to score points. The game includes multiple levels, background music, sound effects, and voice feedback for color names. The objective is to reach the highest score by popping bubbles before the game ends.
 
+## Features
+- Pop bubbles of random colors to score points.
+- Levels increase every 10 points with voice feedback.
+- Background music and sound effects for an immersive experience.
+- Adjustable volume control.
+- Game over screen when the top score is reached.
+- Developed using React and Vite for a fast and modern development experience.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Development Instructions
 
-Currently, two official plugins are available:
+### Prerequisites
+- Node.js and npm installed on your system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Setup
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd color-pop
+   ```
 
-## Expanding the ESLint configuration
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-Commands:
+4. Open the game in your browser at:
+   ```
+   http://localhost:5173
+   ```
 
-rm -rf node_modules/
+### Commands
+- To remove `node_modules` and reinstall dependencies:
+  ```bash
+  rm -rf node_modules/
+  npm install
+  ```
 
-npm install
+- To start the development server:
+  ```bash
+  npm run dev
+  ```
 
-npm run dev
+### Customization
+- Add or modify colors in the `COLORS` array in `ColorPopGame.jsx`.
+- Update sound effects or background music by replacing the audio files in the `src` directory.
+
+## Final URL
+The game is deployed and accessible at:
+[https://color-pop-game.example.com](https://color-pop-game.example.com)
+
+Enjoy popping bubbles and have fun learning React development!
