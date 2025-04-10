@@ -26,9 +26,10 @@ body {
   color: #333;
   margin-bottom: 20px;
   position: absolute;
-  top: 20px; /* Ensure same height as restart-button */
-  left: 20px;
-  text-align: left;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the title */
+  text-align: center;
 }
 
 button {
@@ -67,19 +68,19 @@ button {
 }
 .score {
   position: absolute;
-  top: 150px; /* Ensure same height as title */
+  top: 50px; /* Ensure same height as title */
   left: 20px;
 }
 .level {
   font-size: 1.5rem;
   position: absolute;
-  top: 200px; /* Ensure same height as title */
+  top: 100px; /* Ensure same height as title */
   left: 20px;
 }
-
-.message {  
+.missed-bubbles {
+  font-size: 1.5rem;
   position: absolute;
-  top: 250px; /* Ensure same height as title */
+  top: 150px; /* Ensure same height as title */
   left: 20px;
 }
 
@@ -233,6 +234,7 @@ button {
     font-size: 2rem;
     top: 10px;
     left: 10px;
+    text-align: left;
   }
 
   .score, .message {
@@ -241,9 +243,15 @@ button {
     left: 10px;
   }
 
-  .level{
+  .level {
     font-size: 1.2rem;
     top: 120px;
+    left: 10px;
+  }
+
+  .missed-bubbles {
+    font-size: 1.2rem;
+    top: 140px;
     left: 10px;
   }
 
@@ -275,9 +283,12 @@ button {
 @media (max-width: 480px) {
   .title {
     font-size: 1.5rem;
+    top: 20px;
+    left: 20px;
+    text-align: left;
   }
 
-  .score, .message, .level {
+  .score, .message, .level, .missed-bubbles {
     font-size: 1rem;
   }
 

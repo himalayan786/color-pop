@@ -29,10 +29,12 @@ const ColorPopGame = () => {
   const [bubble, setBubble] = useState(null);
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(0); // Track the current level
-  const [message, setMessage] = useState("Click the bubble to pop!");
+  const [message, setMessage] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
   const [showMessage, setShowMessage] = useState(true); // Track message visibility
   const [gameOver, setGameOver] = useState(false); // Track game over state
+  const [bubbleSpeed, setBubbleSpeed] = useState(3000); // Initial bubble speed in milliseconds
+  const [missedBubbles, setMissedBubbles] = useState(0); // Track missed bubbles
   const audioRef = useRef(null); // Ref for background music
   const popSoundRef = useRef(null); // Ref for bubble pop sound
   const clapSoundRef = useRef(null); // Ref for clap sound
@@ -58,6 +60,9 @@ const ColorPopGame = () => {
         audioRef.current.pause(); // Pause music when the tab is not visible
       } else if (!document.hidden && gameStarted && audioRef.current) {
         audioRef.current.play(); // Resume music when the tab becomes visible
+      }if (audioRef.current) {
+        audioRef.current.pause(); // Stop the game music
+        audioRef.current.currentTime = 0; // Reset music to the beginning
       }
     };
 
@@ -70,20 +75,16 @@ const ColorPopGame = () => {
   useEffect(() => {
     if (gameStarted) {
       setShowMessage(true); // Show message when the game starts
-      // const timer = setTimeout(() => {
-      //   setShowMessage(false); // Hide message after 1 second
-      // }, 1000);
-      // return () => clearTimeout(timer); // Cleanup timer on unmount
     }
   }, [gameStarted]);
 
   useEffect(() => {
     if (score > 0 && score % 10 === 0) {
       setLevel(score / 10); // Update level based on score
+      setBubbleSpeed((prevSpeed) => Math.max(prevSpeed - 200, 500)); // Increase speed, minimum 500ms
       if (clapSoundRef.current) {
         const utterance = new SpeechSynthesisUtterance(`Level ${score / 10} Achieved!`);
         window.speechSynthesis.speak(utterance);
-        // clapSoundRef.current.play(); // Play clap sound on level up
       }
     }
   }, [score]);
@@ -94,9 +95,34 @@ const ColorPopGame = () => {
       if (clapSoundRef.current) {
         clapSoundRef.current.play(); // Play clap sound
       }
+      if (audioRef.current) {
+        audioRef.current.pause(); // Stop the game music
+        audioRef.current.currentTime = 0; // Reset music to the beginning
+      }
       setMessage("You reached the top! 🎉");
     }
   }, [score]);
+
+  useEffect(() => {
+    if (missedBubbles >= 5 && score < 50) {
+      setGameOver(true); // End the game if 5 bubbles are missed
+      setMessage("You Lost. Better Luck Next Time! 😔");
+      if (audioRef.current) {
+        audioRef.current.pause(); // Stop the game music
+        audioRef.current.currentTime = 0; // Reset music to the beginning
+      }
+    }
+  }, [missedBubbles, score]);
+
+  useEffect(() => {
+    if (bubble) {
+      const timer = setTimeout(() => {
+        setBubble(null); // Remove bubble if not popped within the time limit
+        setMissedBubbles((prev) => prev + 1); // Increment missed bubbles
+      }, bubbleSpeed);
+      return () => clearTimeout(timer); // Cleanup timer on bubble change
+    }
+  }, [bubble, bubbleSpeed]);
 
   const generateBubble = () => {
     const newBubble = {
@@ -152,10 +178,11 @@ const ColorPopGame = () => {
   const handleRestart = () => {
     setScore(0);
     setLevel(0); // Reset level
-    setMessage("Click the bubble to pop!");
+    setMessage("");
     setBubble(null);
     setGameStarted(false); // Reset to game start screen
     setGameOver(false); // Reset game over state
+    setMissedBubbles(0); // Reset missed bubbles
   };
 
   const handleStartGame = () => {
@@ -189,13 +216,14 @@ const ColorPopGame = () => {
             Start Game
           </button>
           <h3 className="devTitle">Developed by Kunal Sharma</h3>
+          <p>Click & Pop Bubbles!</p>
           <p className="footer">
             Sound Effects by <a href="https://pixabay.com/">Pixabay</a>
           </p>
         </div>
       ) : gameOver ? (
         <div className="game-over-screen">
-          <h1 className="title">🎉 You reached the top! 🎉</h1>
+          <h1 className="message">{message}</h1>
           <button className="restart-button" onClick={handleRestart}>
             Restart
           </button>
@@ -205,6 +233,7 @@ const ColorPopGame = () => {
           <h1 className="title">🎈 Color Pop 🎈</h1>
           <div className="score">Score: {score}</div>
           <div className="level">Level: {level}</div> {/* Display current level */}
+          <div className="missed-bubbles">Missed: {missedBubbles}</div> {/* Display missed bubbles */}
           {showMessage && <div className="message">{message}</div>} {/* Show message conditionally */}
           {bubble && (
             <Bubble id={bubble.id} color={bubble.color} onPop={handlePop} />
